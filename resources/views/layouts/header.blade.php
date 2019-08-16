@@ -108,9 +108,9 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="search_box pull-right">
+                <div class="search_box">
                     <form action="search" method="get">
-                        <input type="text" name="searchText" placeholder="Поиск"/>
+                        <input type="text" name="searchText" placeholder="Поиск по каталогу"/>
                     </form>
                 </div>
             </div>

@@ -5,7 +5,11 @@
 <h2>Все категории</h2>
 
 @if(session('categoryDeletionStatus'))
-<div class="alert alert-danger"> {{session('categoryDeletionStatus')}} </div>
+<div class="alert alert-warning alert-dismissible fade show" role="alert"> {{session('categoryDeletionStatus')}}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 @endif
 
 

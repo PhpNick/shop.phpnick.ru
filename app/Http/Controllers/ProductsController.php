@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
 use App\Brand;
+use App\Coupon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Cart;
@@ -201,6 +202,7 @@ class ProductsController extends Controller
     $payment_type = $request->input('payment_type');
     $shipment_id = $request->input('shipment_id');
 
+
     //check if user is logged in or not
     $isUserLoggedIn = Auth::check();
 
@@ -213,13 +215,22 @@ class ProductsController extends Controller
       $user_id = 0;
     }
 
-    //Цена вместе со стоимостью доставки
-    $shipment_price = DB::table('shipments')->where('id', '=', $shipment_id)->first()->price;
-    $price = $cart->totalPrice + $shipment_price;
-
     //cart is not empty
     if($cart) {
-    // dump($cart);
+
+      //Цена вместе со стоимостью доставки
+      $shipment_price = DB::table('shipments')->where('id', '=', $shipment_id)->first()->price;
+      $price = $cart->totalPrice + $shipment_price;
+
+      //Работаем с купоном
+      if($request->has('coupon_code')) {
+        $coupon = Coupon::where('code', $request->coupon_code)->first();
+        if ($coupon) {
+          $price -= $coupon->discount($cart->totalPrice);
+        }
+
+      }
+
       $date = \Carbon\Carbon::now();
       $newOrderArray = array("user_id" => $user_id, "status"=>"Не оплачен","date"=>$date,"del_date"=>$date,"price"=>$price,
       "fio"=>$fio, "address"=> $address, 'email'=>$email,'phone'=>$phone, "orderDescription"=>$orderDescription, "payment_type"=>$payment_type, "shipment_id"=>$shipment_id);
@@ -245,6 +256,7 @@ class ProductsController extends Controller
       $payment_info =  $newOrderArray;
       $payment_info['order_id'] = $order_id;
       $payment_info['shipment_price'] = $shipment_price;
+
       $request->session()->put('payment_info',$payment_info);
 
       //   print_r($newOrderArray);

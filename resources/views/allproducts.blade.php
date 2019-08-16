@@ -18,8 +18,8 @@
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
                                 <h2>Интернет-магазин на Laravel</h2>
-                                <p>Используйте безграничные возможности фреймворка Laravel, чтобы создать свой уникальный интернет-магазин на основе готового решения!</p>
-                                <button type="button" class="btn btn-default get">Подробнее</button>
+                                <p>Реализован основной функционал типового интернет-магазина. Продаюся сами исходники. Также могу доработать для реального интернет-магазина</p>
+                                <button type="button" class="btn btn-default get" onclick="location.href='/about'">Подробнее</button>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{asset('images/home/girl1.jpg')}}" class="girl img-responsive" alt="" />
@@ -29,9 +29,9 @@
                         <div class="item">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Адаптивный дизайн</h2>
-                                <p>Универсальность отображения содержимого интернет-магазина на различных устройствах. </p>
-                                <button type="button" class="btn btn-default get">Подробнее</button>
+                                <h2>Адаптивный шаблон</h2>
+                                <p>Используемый шаблон неплохо выглядит на разных устройствах. При желании, конечно, можно прикрутить свой шаблон</p>
+                                <button type="button" class="btn btn-default get" onclick="location.href='/about'">Подробнее</button>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{asset('images/home/girl2.jpg')}}" class="girl img-responsive" alt="" />
@@ -42,9 +42,9 @@
                         <div class="item">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Всего за 2499 <i class="fa fa-rub" aria-hidden="true"></i></h2>
-                                <p>В демонстрационной версии некоторый функционал не работает. Дополнительные услуги по установке, доработке и настройке веб-магазина – 300 <i class="fa fa-rub" aria-hidden="true"></i>/ч.</p>
-                                <button type="button" class="btn btn-default get">Подробнее</button>
+                                <h2>Всего за 4460 <i class="fa fa-rub" aria-hidden="true"></i></h2>
+                                <p>Вы получаете исходники проекта, код из которого можно использовать для разарботки различных веб-сайтов на Laravel</p>
+                                <button type="button" class="btn btn-default get" onclick="location.href='/about'">Подробнее</button>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{asset('images/home/girl3.jpg')}}" class="girl img-responsive" alt="" />

@@ -163,7 +163,7 @@ class AdminProductsController extends Controller
           Storage::deleteDirectory('public/product_images/'.$product->slug);
       }
       Product::destroy($id);
-      return redirect()->route("adminDisplayProducts");
+      return redirect()->back()->with('productDeletionStatus', 'Товар был успешно удален');
 
     }
 

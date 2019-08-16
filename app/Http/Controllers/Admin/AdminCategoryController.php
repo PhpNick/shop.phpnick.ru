@@ -68,7 +68,7 @@ class AdminCategoryController extends Controller
           Storage::delete('public/category_images/'.$category->image);
       }
       Category::destroy($id);
-      return redirect()->route("categoriesPanel");
+      return redirect()->back()->with('categoryDeletionStatus', 'Категория была успешно удалена');
 
     }
 

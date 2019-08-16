@@ -36,7 +36,7 @@ class PaymentsController extends Controller{
                 $this->storePaymentInfo($paypalPaymentID,$paypalPayerID);
 
                  $payment_receipt = Session::get('payment_info');
-
+                 
                  $payment_receipt['paypal_payment_id'] = $paypalPaymentID;
                  $payment_receipt['paypal_payer_id'] = $paypalPayerID;
 
@@ -48,7 +48,8 @@ class PaymentsController extends Controller{
            
                 //return and pass relevant info
 
-             return view('payment.paymentreceipt',['payment_receipt' => $payment_receipt]);
+             return view('payment.paymentreceipt',[
+                'payment_receipt' => $payment_receipt]);
 
         }else{
                return redirect()->route("allProducts");

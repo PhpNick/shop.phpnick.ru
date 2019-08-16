@@ -37,6 +37,7 @@
                                     <a class="" id="paypal-button" ></a>
                                     @else
                                     <div class="text-center alert alert-success"><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i> Оплата курьеру при получении товара</div>
+                                    <a class="btn btn-default update" href="{{route('allProducts')}}">К каталогу</a>
                                     @endif
                             </div>
         

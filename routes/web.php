@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/about', function(){
+    return view('about');
+});
+
 Route::get('/',  ["uses"=>"ProductsController@index", "as"=> "allProducts"]);
 
 //contacts
@@ -49,6 +53,10 @@ Route::get('payment/paymentpage', ["uses"=> "Payment\PaymentsController@showPaym
 
 //process payment & receipt page
 Route::get('payment/paymentreceipt/{paymentID}/{payerID}', ["uses"=> "Payment\PaymentsController@showPaymentReceipt", 'as'=> 'showPaymentReceipt']);
+
+//coupons
+Route::post('/coupon', 'CouponsController@store')->name('coupon.store');
+Route::delete('/coupon', 'CouponsController@destroy')->name('coupon.destroy');
 
 //User Authentication
 Auth::routes();
@@ -165,6 +173,30 @@ Route::group(['middleware' => ['restrictToAdmin']], function () {
 
 	//update order data
 	Route::post('admin/updateOrder/{order_id}', ["uses"=>"Admin\AdminOrdersController@updateOrder", "as"=> "adminUpdateOrder"]);
+
+	//display create coupon form
+	Route::get('admin/createCouponForm', ["uses"=>"Admin\AdminCouponsController@createCouponForm", "as"=> "adminCreateCouponForm"]);
+
+	//send new coupon data to database
+	Route::post('admin/sendCreateCouponForm/', ["uses"=>"Admin\AdminCouponsController@sendCreateCouponForm", "as"=> "adminSendCreateCouponForm"]);
+
+	//coupons control panel
+	Route::get('admin/couponsPanel/', ["uses" => "Admin\AdminCouponsController@couponsPanel" , "as" => "couponsPanel"]);
+
+	//make coupon published
+	Route::patch('admin/coupons/{coupon}/publish', ["uses"=>"Admin\AdminCouponsController@publish", "as"=> "adminPublishCoupon"]);
+
+	//display edit coupon form
+	Route::get('admin/editCouponForm/{id}', ["uses"=>"Admin\AdminCouponsController@editCouponForm", "as"=> "adminEditCouponForm"]);
+
+	//delete coupon
+	Route::get('admin/deleteCoupon/{id}', ["uses"=>"Admin\AdminCouponsController@deleteCoupon", "as"=> "adminDeleteCoupon"]);
+
+	//update coupon data
+	Route::post('admin/updateCoupon/{id}', ["uses"=>"Admin\AdminCouponsController@updateCoupon", "as"=> "adminUpdateCoupon"]);
+
+	//display edit coupon form
+	Route::get('admin/editCouponForm/{id}', ["uses"=>"Admin\AdminCouponsController@editCouponForm", "as"=> "adminEditCouponForm"]);							
 
 });
 

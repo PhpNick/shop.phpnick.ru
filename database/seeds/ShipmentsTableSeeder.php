@@ -22,10 +22,6 @@ class ShipmentsTableSeeder extends Seeder
 		DB::table('shipments')->insert([
             'name' => 'Самовывоз (Стоимость: бесплатно)',
             'price' => 0,
-        ]);
-		DB::table('shipments')->insert([
-            'name' => 'Бесплатная доставка (при сумме покупки от 3000 руб.)',
-            'price' => 0,
-        ]);                         
+        ]);           
     }
 }

@@ -67,6 +67,9 @@
             <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/shipmentsPanel')!== false) ? 'active' : '' }}" href="{{route('shipmentsPanel')}}">
             <span data-feather="truck"></span>
             Способы доставки</a></li>
+            <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/couponsPanel')!== false) ? 'active' : '' }}" href="{{route('couponsPanel')}}">
+            <span data-feather="gift"></span>
+            Купоны</a></li>            
         </ul>
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>Добавить</span>
@@ -86,7 +89,10 @@
             Добавить бренд</a></li>
             <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/createShipmentForm')!== false) ? 'active' : '' }}" href="{{route('adminCreateShipmentForm')}}">
             <span data-feather="plus-circle"></span>
-            Добавить способ доставки</a></li>                           
+            Добавить способ доставки</a></li>
+            <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/createCouponForm')!== false) ? 'active' : '' }}" href="{{route('adminCreateCouponForm')}}">
+            <span data-feather="plus-circle"></span>
+            Добавить купон</a></li>                                       
         </ul>        
       </div>
     </nav>

@@ -74,6 +74,8 @@
                                     <option value="paypal">PayPal/Visa/MasterCard</option>
                                     <option value="cash">Наличные</option>
                                 </select>
+                                <p><i class="fa fa-gift" aria-hidden="true"></i> Купон на скидку</p>
+                                <input type="text" name="coupon_code" id="coupon_code" placeholder="Код купона">
                             </div>
                         </div>
 

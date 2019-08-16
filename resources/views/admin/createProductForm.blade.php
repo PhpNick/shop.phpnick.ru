@@ -69,7 +69,7 @@
             </select>
         </div>                   
         <div class="form-group">
-            <label for="type">Цена</label>
+            <label for="price">Цена</label>
             <div class="input-group">
                 <input type="text" class="form-control" name="price" id="price" placeholder="0.00" required>
                 <div class="input-group-append">
@@ -78,16 +78,23 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="type">Количество</label>
+            <label for="quantity">Количество</label>
             <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Количество товара" required>
         </div>
         <div class="form-group">
-            <label for="type">Популярный</label>
+            <label for="popular">Популярный</label>
             <select class="form-control" name="popular">
               <option value="0" selected>Нет</option>
               <option value="1">Да</option>
             </select>
-        </div>                
+        </div> 
+        <div class="form-group">
+            <label for="type">Активность</label>
+            <select class="form-control" name="publish">
+              <option value="0">Нет</option>
+              <option value="1">Да</option>
+            </select>
+        </div>                       
         <button type="submit" name="submit" class="btn btn-sm btn-outline-primary">Добавить</button>
     </form>
 
