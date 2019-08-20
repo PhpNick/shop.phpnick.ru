@@ -2576,3 +2576,25 @@ a.categoryMenuItem > span:hover {
 span.cart-badge {
   background-color: #FE980F;
 }
+
+#search-wrapper.highlight {
+  z-index: 1040;
+}
+
+#ajaxSearch {
+  overflow: visible;
+  width: 100%;
+}
+
+#ajaxSearch .line div {
+  padding: 5px;
+}
+
+#ajaxSearch .line {
+  color: black;
+}
+
+#ajaxSearch .line:hover div {
+  cursor: pointer;
+  background-color: #f6f6f7;
+}

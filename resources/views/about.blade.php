@@ -71,10 +71,12 @@
 	<li>форма обратной связи;</li>
 	<li>купоны и скидочные акции;</li>
 	<li>раздел популярных товаров;</li>
-	<li>полнотекстовый поиск по каталогу товаров.</li>
+	<li>живой полнотекстовый поиск по каталогу товаров.</li>
 </ol>
 
 <p>Стоимость исходного кода &ndash; <strong>4460</strong> <i class="fa fa-rub" aria-hidden="true"></i>. Со всеми вопросами пишите по адресу &ndash; <strong><a href="mailto:phpnick.ru@gmail.com" target="_blank">phpnick.ru@gmail.com</a></strong>.</p>
+
+<p style="text-align: center"><strong>Претензии по полноте и качеству кода не принимаются.</strong></p>
 
 				</div>
 			</div><!--/blog-post-area-->

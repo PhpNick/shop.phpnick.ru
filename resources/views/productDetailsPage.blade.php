@@ -49,7 +49,7 @@
 								</a>
 							</div>
 							<!-- Slider -->
-							@if(count($files))
+							@if(isset($files))
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								<!-- Wrapper for slides -->
 								<div class="carousel-inner">

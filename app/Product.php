@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use FullTextSearch;
     /**
      * The relationships to always eager-load.
      *
@@ -77,7 +78,17 @@ class Product extends Model
         }
         else
             return $query->where('products.publish', '=', 1);       
-    }                      
+    }
+
+    /**
+     * The columns of the full text index
+     */
+    protected $searchable = [
+        'name',
+        'slug',
+        'short_description',
+        'description'
+    ];                      
 
 }
 

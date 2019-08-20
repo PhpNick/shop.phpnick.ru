@@ -74,22 +74,37 @@
 </footer><!--/Footer-->
 
 <div id="itemAddedToCart" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Товар добавлен в корзину</h4>
-                </div>
-                <div class="modal-body">
-                    Содержимое модального окна...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Продолжить покупки</button>
-                    <a href="{{route('cartproducts')}}" type="button" class="btn btn-primary">Перейти в корзину</a>
-                </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Товар добавлен в корзину</h4>
+            </div>
+            <div class="modal-body">
+                Содержимое модального окна...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Продолжить покупки</button>
+                <a href="{{route('cartproducts')}}" type="button" class="btn btn-primary">Перейти в корзину</a>
             </div>
         </div>
     </div>
+</div>
+
+<div id="ajaxSearch" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Поиск по каталогу</h4>
+            </div>
+            <div class="modal-body">
+                
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="{{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>

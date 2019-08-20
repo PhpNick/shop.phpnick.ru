@@ -28,6 +28,9 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 8, 2);
             $table->timestamps();
         });
+
+        // Full Text Index
+        DB::statement('ALTER TABLE products ADD FULLTEXT fulltext_index (name, slug, short_description, description)');
     }
 
     /**

@@ -32,7 +32,7 @@
                                    success:function(data){
                                       $( ".ajax-cart" ).html('<i class="fa fa-shopping-cart"></i> Корзина <span class="badge cart-badge">'+data['1']+'</span>');
 
-                                      $("#itemAddedToCart .modal-body").html('<img width="100" style="float: left" src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>{{$product->price}}</h3>');
+                                      $("#itemAddedToCart .modal-body").html('<img width="100" style="float: left; margin-right: 5px" src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>{{$product->price}}</h3>');
                                       $("#itemAddedToCart").modal('show');
                                    }
                                 });

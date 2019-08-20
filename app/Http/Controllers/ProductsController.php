@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 class ProductsController extends Controller
 {
   private $paginateMax = 10;
+  private $paginateMaxSearch = 5;
 
   public function index(Request $request, Category $category, Brand $brand){
       $products = $this->getProducts($category, $brand);
@@ -61,8 +62,30 @@ class ProductsController extends Controller
 
   public function search(Request $request){
 
+      //живой поиск
+      if($request->ajax()) {
+        $output="";
+        $searchText = $request->get('searchText');
+        $products = Product::search($searchText)->published()->paginate($this->paginateMaxSearch);
+
+        if(count($products)) {
+          foreach ($products as $key => $product) {
+          $output.='<a class="line" 
+          href="'.route('productDetailsPage',['product'=>$product->slug]).'"><div>'.
+          '<img width="100" style="float: left; margin-right: 5px" src="'.asset ('storage').'/product_images/'.$product['image'].'" alt="" />'.
+          '<p>'.$product->name.'</p>'.
+          '<p>'.$product->brand->name.' | '.$product->category->name.'</p>'.
+          '<h4>'.$product->price.' <i class="fa fa-rub" aria-hidden="true"></i></h4>'.
+          '</div></a>';
+          }
+        }
+        else 
+          $output ='<div style="text-align: center">Ничего не найдено</div>';
+        return Response($output);
+      }
+
       $searchText = $request->get('searchText');
-      $products = Product::where('name',"Like",$searchText."%")->published()->paginate($this->paginateMax);
+      $products = Product::search($searchText)->published()->paginate($this->paginateMax);
       return view("allproducts",compact("products"));
   }
 

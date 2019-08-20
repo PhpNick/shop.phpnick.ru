@@ -107,10 +107,10 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div id="search-wrapper" class="col-sm-3">
                 <div class="search_box">
                     <form action="search" method="get">
-                        <input type="text" name="searchText" placeholder="Поиск по каталогу"/>
+                        <input autocomplete="off" type="text" name="searchText" id="search" placeholder="Поиск по каталогу"/>
                     </form>
                 </div>
             </div>
@@ -118,3 +118,34 @@
     </div>
 </div><!--/header-bottom-->
 </header><!--/header--> 
+@section('ajax')
+@parent
+
+$('#search').on('keyup',function(){
+    $value=$(this).val();
+    $.ajax({
+        type : 'get',
+        url : '{{URL::to('search')}}',
+        data:{'searchText':$value},
+        success:function(data) {
+            $('#ajaxSearch .modal-body').html(data);
+            $("#ajaxSearch").modal('show');
+            $("#search-wrapper").addClass('highlight');
+            //Результаты поиска под поле поиска
+            var offset = $('#search-wrapper.highlight').offset();
+            var height = $('#search-wrapper.highlight').height();
+            var width = $('#search-wrapper.highlight').width();
+            var top = offset.top + height + "px";
+            var right = offset.left + width + "px";
+
+            $('#ajaxSearch').css( {
+                'position': 'absolute',
+                'right': right,
+                'top': top
+            });
+
+        }
+    });
+})
+
+@endsection
