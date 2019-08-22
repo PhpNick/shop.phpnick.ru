@@ -16,7 +16,7 @@ class AdminProductsController extends Controller
 
     //display all products
     public function index(){
-        $products = Product::paginate(3);
+        $products = Product::paginate(10);
         return view("admin.displayProducts",['products'=>$products]);
 
     }
@@ -34,11 +34,15 @@ class AdminProductsController extends Controller
         $slug =  $request->input('slug');
         $category_id = $request->input('category_id');
         $brand_id = $request->input('brand_id');
+        $special_id = null;
+        if($request->has('special_id'))
+          $special_id = $request->input('special_id');
         $shortDescription =  $request->input('short-description');
         $description =  $request->input('description');
         $price = $request->input('price');
         $quantity = $request->input('quantity');
         $popular = $request->input('popular');
+        $publish = $request->input('publish');
 
         Validator::make($request->all(),['image'=>"required|file|image|mimes:jpg,png,jpeg|max:5000"])->validate();
         $ext =  $request->file("image")->getClientOriginalExtension();
@@ -46,7 +50,6 @@ class AdminProductsController extends Controller
 
         $imageName = $stringImageReFormat.".".$ext; //blackdress.jpg
         $imageEncoded = File::get($request->image);
-        Storage::disk('local')->makeDirectory($slug);
         Storage::disk('local')->put('public/product_images/'.$slug.'/'.$imageName, $imageEncoded);
 
         // Закачиваем в папку дополнительные файлы
@@ -67,7 +70,7 @@ class AdminProductsController extends Controller
           }
         }        
 
-        $newProductArray = array("name"=>$name, "slug"=>$slug, "short_description"=> $shortDescription,"description"=> $description, "image"=> $slug.'/'.$imageName,"price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"category_id"=>$category_id, "brand_id"=>$brand_id);
+        $newProductArray = array("name"=>$name, "slug"=>$slug, "short_description"=> $shortDescription,"description"=> $description, "image"=> $slug.'/'.$imageName,"price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"publish"=>$publish,"category_id"=>$category_id, "brand_id"=>$brand_id, "special_id"=>$special_id);
 
         $created = DB::table("products")->insert($newProductArray);
 
@@ -141,8 +144,11 @@ class AdminProductsController extends Controller
       $quantity = $request->input('quantity');
       $popular = $request->input('popular');
       $publish = $request->input('publish');
+      $special_id = null;
+        if($request->has('special_id'))
+          $special_id = $request->input('special_id');
 
-      $updateArray = array("name"=>$name, "short_description"=> $shortDescription,"description"=> $description, "price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"publish"=>$publish,"category_id"=>$category_id, "brand_id"=>$brand_id);
+      $updateArray = array("name"=>$name, "short_description"=> $shortDescription,"description"=> $description, "price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"publish"=>$publish,"category_id"=>$category_id, "brand_id"=>$brand_id, "special_id"=>$special_id);
 
       DB::table('products')->where('id',$id)->update($updateArray);
 

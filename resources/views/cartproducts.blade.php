@@ -36,7 +36,14 @@
                         Бренд: {{$item['data']['brand']['name']}} <br>
                     </td>
                     <td class="cart_price">
+                        @php
+                        $model = \App\Special::find($item['data']['special']['id']);
+                        @endphp
+                        @if($item['data']['special'] && $model->discount() > 0)
+                        <p>{{$item['data']['price'] - $model->discount($item['data']['price'])}}<br><i>(по акции)</i></p>
+                        @else
                         <p>{{$item['data']['price']}}</p>
+                        @endif
                     </td>
                     <td class="cart_quantity">
                         <div class="cart_quantity_button">

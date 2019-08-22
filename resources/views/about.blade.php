@@ -74,6 +74,10 @@
 	<li>живой полнотекстовый поиск по каталогу товаров.</li>
 </ol>
 
+<p>
+	Функционал в футере не реализован.
+</p>
+
 <p>Стоимость исходного кода &ndash; <strong>4460</strong> <i class="fa fa-rub" aria-hidden="true"></i>. Со всеми вопросами пишите по адресу &ndash; <strong><a href="mailto:phpnick.ru@gmail.com" target="_blank">phpnick.ru@gmail.com</a></strong>.</p>
 
 <p style="text-align: center"><strong>Претензии по полноте и качеству кода не принимаются.</strong></p>

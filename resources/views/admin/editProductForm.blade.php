@@ -43,7 +43,24 @@
                 @endforelse
             </select>
         </div>        
-
+        <div class="form-group {{ $errors->has('special_id') ? 'has-error' : '' }}">
+            <label for="special_id" class="">Акция</label>
+            @if($product->special)
+            <select class="form-control" id="special_id" name="special_id">
+                <option value="">Без акции</option>
+                @foreach ($specials as $special)
+                <option value="{{$special->id}}" {{$special->id == $product->special->id ? 'selected' :''}}>{{$special->name}}</option>
+                @endforeach
+            </select>
+            @else
+            <select class="form-control" id="special_id" name="special_id">
+                <option value="" selected>Без акции</option>
+                @foreach ($specials as $special)
+                <option value="{{$special->id}}">{{$special->name}}</option>
+                @endforeach
+            </select>            
+            @endif
+        </div>
         <div class="form-group">
             <label for="type">Цена</label>
             <input type="text" class="form-control" name="price" id="price" placeholder="Цена товара" value="{{$product->price}}" required>

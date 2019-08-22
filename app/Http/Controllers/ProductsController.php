@@ -74,9 +74,13 @@ class ProductsController extends Controller
           href="'.route('productDetailsPage',['product'=>$product->slug]).'"><div>'.
           '<img width="100" style="float: left; margin-right: 5px" src="'.asset ('storage').'/product_images/'.$product['image'].'" alt="" />'.
           '<p>'.$product->name.'</p>'.
-          '<p>'.$product->brand->name.' | '.$product->category->name.'</p>'.
-          '<h4>'.$product->price.' <i class="fa fa-rub" aria-hidden="true"></i></h4>'.
-          '</div></a>';
+          '<p>'.$product->brand->name.' | '.$product->category->name.'</p>';
+          if($product->special) {
+            $priceWithDiscount = $product->price - $product->special->discount($product->price);
+            $output .='<h4 style="display: inline-block">'.$priceWithDiscount.' <i class="fa fa-rub" aria-hidden="true"></i></h4> <s>'.$product->price.'</s> <i class="fa fa-rub" aria-hidden="true"></i></div></a>';
+          }
+          else
+            $output .='<h4>'.$product->price.' <i class="fa fa-rub" aria-hidden="true"></i></h4>'.'</div></a>';
           }
         }
         else 
@@ -196,9 +200,7 @@ class ProductsController extends Controller
 
       if( $cart->items[$id]['quantity'] > 1){
                 $product = Product::find($id);
-                $cart->items[$id]['quantity'] = $cart->items[$id]['quantity']-1;
-                $cart->items[$id]['totalSinglePrice'] = $cart->items[$id]['quantity'] *  $product['price'];
-                $cart->updatePriceAndQunatity();
+                $cart->removeItem($id, $product);
             
                 $request->session()->put('cart', $cart);
                 

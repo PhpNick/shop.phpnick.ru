@@ -1,6 +1,6 @@
  @forelse($products as $product)
 
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="product-image-wrapper">
             <div class="single-products">
                 <div class="productinfo text-center">
@@ -8,14 +8,26 @@
                     <h2>
                         <a href="{{route('productDetailsPage',['product'=>$product->slug])}}">{{$product->name}}</a>
                         </h2>
-                    {{$product->price}} <i class="fa fa-rub" aria-hidden="true"></i>
+                    @if($product->special && $product->special->discount() > 0)
+                    <strong>{{$product->price - $product->special->discount($product->price)}}</strong> <i class="fa fa-rub" aria-hidden="true"></i>
+
+                    <s>{{$product->price}}</s> <i class="fa fa-rub" aria-hidden="true"></i>
+                    @else
+                    <strong>{{$product->price}}</strong> <i class="fa fa-rub" aria-hidden="true"></i>
+                    @endif
                     <p>{{$product->category->name}} ({{$product->brand->name}})</p>
                     <a href="{{route('AddToCartProduct',['id'=>$product->id])}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину
                     </a>                                    
                 </div>
                 <div class="product-overlay">
                     <div class="overlay-content">
+                        @if($product->special && $product->special->discount() > 0)
+                        <h2>{{$product->price - $product->special->discount($product->price)}} <i class="fa fa-rub" aria-hidden="true"></i></h2>
+                        
+                        <s>{{$product->price}}</s> <i class="fa fa-rub" aria-hidden="true"></i>
+                        @else
                         <h2>{{$product->price}} <i class="fa fa-rub" aria-hidden="true"></i></h2>
+                        @endif                            
                         <p>{{$product->name}}</p>
                         <a href="{{route('productDetailsPage',['product'=>$product->slug])}}" class="btn btn-default add-to-cart"><i class="fa fa-info-circle"></i>Подробнее</a>
                         <a id="ajaxCartItem{{$product->id}}" href="{{route('AddToCartProduct',['id'=>$product->id])}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
@@ -32,7 +44,7 @@
                                    success:function(data){
                                       $( ".ajax-cart" ).html('<i class="fa fa-shopping-cart"></i> Корзина <span class="badge cart-badge">'+data['1']+'</span>');
 
-                                      $("#itemAddedToCart .modal-body").html('<img width="100" style="float: left; margin-right: 5px" src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>{{$product->price}}</h3>');
+$("#itemAddedToCart .modal-body").html('<img width="100" style="float: left; margin-right: 5px" src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>@if($product->special && $product->special->discount() > 0)<strong>{{$product->price - $product->special->discount($product->price)}}</strong> <i class="fa fa-rub" aria-hidden="true"></i> <s>{{$product->price}}</s> <i class="fa fa-rub" aria-hidden="true"></i>@else<strong>{{$product->price}}</strong> <i class="fa fa-rub" aria-hidden="true"></i>@endif');
                                       $("#itemAddedToCart").modal('show');
                                    }
                                 });

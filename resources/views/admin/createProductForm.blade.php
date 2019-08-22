@@ -67,7 +67,16 @@
                     <option>Пока что здесь ничего нет</option>
                 @endforelse
             </select>
-        </div>                   
+        </div>
+        <div class="form-group {{ $errors->has('special_id') ? 'has-error' : '' }}">
+            <label for="special_id" class="">Акция</label>
+            <select class="form-control" id="special_id" name="special_id">
+                <option value="">Без акции</option>
+                @foreach ($specials as $special)
+                <option value="{{$special->id}}">{{$special->name}}</option>
+                @endforeach
+            </select>
+        </div>                           
         <div class="form-group">
             <label for="price">Цена</label>
             <div class="input-group">

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
-	public function discount($total)
-    {
+	public function discount($total) {
         $todayDate = date("Y-m-d");
         if($todayDate < $this->start_date || $todayDate > $this->end_date)
         	return 0;

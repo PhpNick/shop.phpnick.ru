@@ -12,7 +12,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $with = ['category', 'brand'];     
+    protected $with = ['category', 'brand', 'special'];     
 
     /**
      * Don't auto-apply mass assignment protection.
@@ -51,6 +51,16 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+
+    /**
+     * A product is assigned a special.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function special()
+    {
+        return $this->belongsTo(Special::class);
+    }    
 
     /**
      * Get the route key for the model.

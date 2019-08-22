@@ -15,14 +15,14 @@
     </div>
     @endif
 
-    <h2>Новый купон</h2>
+    <h2>Новая акция</h2>
 
-    <form action="{{ route('adminSendCreateCouponForm')}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('adminSendCreateSpecialForm')}}" method="post" enctype="multipart/form-data">
 
         {{csrf_field()}}
         <div class="form-group">
-            <label for="code">Код купона</label>
-            <input type="text" class="form-control" name="code" placeholder="Код купона" required>
+            <label for="name">Название</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Название акции" required>
         </div>
         <div class="form-group">
             <label for="type">Тип скидки</label>
@@ -42,24 +42,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="max_number_of_uses">Максимальное количество использований (пусто - без ограничений)</label>
-            <input type="text" class="form-control" name="max_number_of_uses" id="max_number_of_uses" placeholder="">
-        </div>                 
-        <div class="form-group">
             <label for="start_date">Начальная дата</label>
-            <input type="date" class="form-control" name="start_date" id="start_date" placeholder="Начальная дата" value="" required>
+            <input type="date" class="form-control" name="start_date" id="start_date" placeholder="Начальная дата" value="">
         </div>
         <div class="form-group">
             <label for="end_date">Конечная дата</label>
-            <input type="date" class="form-control" name="end_date" id="end_date" placeholder="Конечная дата" value="" required>
+            <input type="date" class="form-control" name="end_date" id="end_date" placeholder="Конечная дата" value="">
         </div>
-        <div class="form-group">
-            <label for="publish">Активность</label>
-            <select class="form-control" name="publish">
-              <option value="0">Нет</option>
-              <option value="1">Да</option>
-            </select>
-        </div>                        
         <button type="submit" name="submit" class="btn btn-sm btn-outline-primary">Добавить</button>
     </form>
 

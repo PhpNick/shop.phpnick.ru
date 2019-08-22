@@ -196,8 +196,27 @@ Route::group(['middleware' => ['restrictToAdmin']], function () {
 	Route::post('admin/updateCoupon/{id}', ["uses"=>"Admin\AdminCouponsController@updateCoupon", "as"=> "adminUpdateCoupon"]);
 
 	//display edit coupon form
-	Route::get('admin/editCouponForm/{id}', ["uses"=>"Admin\AdminCouponsController@editCouponForm", "as"=> "adminEditCouponForm"]);							
+	Route::get('admin/editCouponForm/{id}', ["uses"=>"Admin\AdminCouponsController@editCouponForm", "as"=> "adminEditCouponForm"]);
 
+	//display create special form
+	Route::get('admin/createSpecialForm', ["uses"=>"Admin\AdminSpecialsController@createSpecialForm", "as"=> "adminCreateSpecialForm"]);
+
+	//send new special data to database
+	Route::post('admin/sendCreateSpecialForm/', ["uses"=>"Admin\AdminSpecialsController@sendCreateSpecialForm", "as"=> "adminSendCreateSpecialForm"]);
+
+	//send new special data to database
+	Route::post('admin/sendCreateSpecialForm/', ["uses"=>"Admin\AdminSpecialsController@sendCreateSpecialForm", "as"=> "adminSendCreateSpecialForm"]);
+
+	//specials control panel
+	Route::get('admin/specialsPanel/', ["uses" => "Admin\AdminSpecialsController@specialsPanel" , "as" => "specialsPanel"]);
+
+	//delete special
+	Route::get('admin/deleteSpecial/{id}', ["uses"=>"Admin\AdminSpecialsController@deleteSpecial", "as"=> "adminDeleteSpecial"]);												
+	//update special data
+	Route::post('admin/updateSpecial/{id}', ["uses"=>"Admin\AdminSpecialsController@updateSpecial", "as"=> "adminUpdateSpecial"]);
+
+	//display edit special form
+	Route::get('admin/editSpecialForm/{id}', ["uses"=>"Admin\AdminSpecialsController@editSpecialForm", "as"=> "adminEditSpecialForm"]);
 });
 
 //Admin Panel

@@ -69,7 +69,10 @@
             Способы доставки</a></li>
             <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/couponsPanel')!== false) ? 'active' : '' }}" href="{{route('couponsPanel')}}">
             <span data-feather="gift"></span>
-            Купоны</a></li>            
+            Купоны</a></li>
+            <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/specialsPanel')!== false) ? 'active' : '' }}" href="{{route('specialsPanel')}}">
+            <span data-feather="percent"></span>
+            Акции</a></li>                        
         </ul>
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>Добавить</span>
@@ -92,7 +95,10 @@
             Добавить способ доставки</a></li>
             <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/createCouponForm')!== false) ? 'active' : '' }}" href="{{route('adminCreateCouponForm')}}">
             <span data-feather="plus-circle"></span>
-            Добавить купон</a></li>                                       
+            Добавить купон</a></li>
+            <li class="nav-item"><a class="nav-link {{ (strpos(url()->current(), '/admin/createSpecialForm')!== false) ? 'active' : '' }}" href="{{route('adminCreateSpecialForm')}}">
+            <span data-feather="plus-circle"></span>
+            Добавить акцию</a></li>                                                   
         </ul>        
       </div>
     </nav>
@@ -124,7 +130,19 @@
               <span data-feather="plus-circle"></span>
               Добавить способ доставки
             </a>
-            @endif                                    
+            @endif
+            @if(strpos(url()->current(), '/admin/couponsPanel')!== false)
+            <a href="{{route('adminCreateCouponForm')}}" class="btn btn-sm btn-outline-secondary">
+              <span data-feather="plus-circle"></span>
+              Добавить купон
+            </a>
+            @endif            
+            @if(strpos(url()->current(), '/admin/specialsPanel')!== false)
+            <a href="{{route('adminCreateSpecialForm')}}" class="btn btn-sm btn-outline-secondary">
+              <span data-feather="plus-circle"></span>
+              Добавить акцию
+            </a>
+            @endif                                                
           </div>
         </div>
         @else

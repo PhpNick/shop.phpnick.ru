@@ -10,6 +10,7 @@ use App\Category;
 use App\Brand;
 use App\Product;
 use App\Shipment;
+use App\Special;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,12 +28,14 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::with('children')->get();
             $categoriesMenu = Category::get()->groupBy('parent_id');
             $brands = Brand::get();
+            $specials = Special::get();
             $shipments = Shipment::get();
             $popularProducts = Product::where('popular', 1)->published()->get();
             $view->with('userData',Auth::user());
             $view->with('categories', $categories);
             $view->with('categoriesMenu', $categoriesMenu);
             $view->with('brands', $brands);
+            $view->with('specials', $specials);
             $view->with('shipmentsGlobal', $shipments);
             $view->with('popularProducts', $popularProducts);
         });

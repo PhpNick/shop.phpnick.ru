@@ -36,18 +36,15 @@ class AdminCouponsController extends Controller
         if($created){
             return redirect()->route("couponsPanel");
         }else{
-           return "Купон не был создан не был создан";
+           return "Купон не был создан";
         }
     }
 
     //coupons control panel (display all coupons)
-    
     public function couponsPanel(){
-    
       $coupons = Coupon::paginate(10);
       //print_r($coupons);
       return view('admin.couponsPanel', ["coupons" => $coupons]);
-   
     }
 
     public function publish(Request $request, Coupon $coupon)

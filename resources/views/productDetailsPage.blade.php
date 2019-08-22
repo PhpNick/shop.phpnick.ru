@@ -81,7 +81,15 @@
 							<div class="product-information"><!--/product-information-->
 								<h2>{{$product->name}}</h2>
 								<span>
-									<span>{{$product->price}} <i class="fa fa-rub" aria-hidden="true"></i></span>
+			                    @if($product->special && $product->special->discount() > 0)
+			                    <span>{{$product->price - $product->special->discount($product->price)}}<i class="fa fa-rub" aria-hidden="true"></i></span> 
+
+			                    <s>{{$product->price}}</s> <i class="fa fa-rub" aria-hidden="true"></i>
+			                    <br>
+			                    Акция действует: {{$product->special->end_date !== null ? 'до '.Carbon\Carbon::parse($product->special->end_date)->format('d.m.Y') : 'бессрочно'}}
+			                    @else
+			                    <span>{{$product->price}} <i class="fa fa-rub" aria-hidden="true"></i></span>
+			                    @endif
 								</span>
 								<span>
 									<label>Количество:</label>
@@ -94,7 +102,7 @@
 				                        @if(request()->session()->has('status'))
 										@section('ajax')
                        					@parent
-										$("#itemAddedToCart .modal-body").html('<img width="100" style="float: left" src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>{{$product->price}}</h3>');
+$("#itemAddedToCart .modal-body").html('<img width="100" style="float: left; margin-right: 5px" src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>@if($product->special && $product->special->discount() > 0)<strong>{{$product->price - $product->special->discount($product->price)}}</strong> <i class="fa fa-rub" aria-hidden="true"></i> <s>{{$product->price}}</s> <i class="fa fa-rub" aria-hidden="true"></i>@else<strong>{{$product->price}}</strong> <i class="fa fa-rub" aria-hidden="true"></i>@endif');
                                         $("#itemAddedToCart").modal('show');						@endsection
 				                        @endif
 									</button>

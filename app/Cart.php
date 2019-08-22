@@ -36,8 +36,10 @@ class Cart
     }
 
     public function addItem($id, $product, $quantity = 1){
-
-       $price = (float) str_replace("$","",$product->price);
+        if($product->special && $product->special->discount() > 0)
+            $price = $product->price - $product->special->discount($product->price);
+        else    
+            $price = $product->price;
 
         //the item already exists
         if(array_key_exists($id,$this->items)){
@@ -57,6 +59,21 @@ class Cart
         $this->totalQuantity += $quantity;
         $this->totalPrice = $this->totalPrice + $quantity * $price;
     }
+
+    public function removeItem($id, $product, $quantity = 1){
+        if($product->special && $product->special->discount() > 0)
+            $product->price - $product->special->discount($product->price);
+        else    
+            $price = $product->price;
+
+        $productToRemove = $this->items[$id];
+        $productToRemove['quantity'] -= $quantity;
+        $productToRemove['totalSinglePrice'] = $productToRemove['quantity'] *  $price;
+
+        $this->items[$id] = $productToRemove;
+        $this->totalQuantity -= $quantity;
+        $this->totalPrice = $this->totalPrice - $quantity * $price;
+    }    
 
     public function updatePriceAndQunatity(){
 
