@@ -16,6 +16,16 @@ class Category extends Model
 	    return $this->hasMany(Category::class, 'parent_id');
 	}
 
+    public function allchildren()
+    {
+        return $this->children()->with('allchildren');
+    } 
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }       
+
     /**
      * Get the route key for the model.
      *

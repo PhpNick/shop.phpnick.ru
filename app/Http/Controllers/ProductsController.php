@@ -20,6 +20,7 @@ class ProductsController extends Controller
 {
   private $paginateMax = 10;
   private $paginateMaxSearch = 5;
+  private $allcategories;
 
   public function index(Request $request, Category $category, Brand $brand){
       $products = $this->getProducts($category, $brand);
@@ -39,13 +40,35 @@ class ProductsController extends Controller
   protected function getProducts(Category $category, Brand $brand)
   {
       if ($category->exists) {
-          return Product::where('category_id', $category->id)->published()->paginate($this->paginateMax);
+          $this->allcategories = collect();
+          $this->allcategories->push($category);
+          $this->getAllCategories($category);
+          $products = $this->allcategories->pluck('products')->flatten();
+          $paginatedAllProducts = new \Illuminate\Pagination\LengthAwarePaginator(
+          $products->forPage(1, $this->paginateMax), 
+          $products->count(), 
+          $this->paginateMax, 
+          1
+          );          
+          return $paginatedAllProducts;
       }
       if ($brand->exists) {
           return Product::where('brand_id', $brand->id)->published()->paginate($this->paginateMax);
       }
       else
           return Product::published()->paginate($this->paginateMax);
+  }
+
+  //Рекурсивная функция, чтобы получить все категории
+  //в коллекцию $this->allcategories
+  private function getAllCategories(Category $category) {
+      if($category->children()) {
+        $categories = $category->allchildren()->with('products')->get();
+        foreach ($categories as $kat) {
+          $this->allcategories->push($kat);
+          $this->getAllCategories($kat);
+        }
+      }
   }
 
   public function price(Request $request){
