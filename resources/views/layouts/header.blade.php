@@ -103,6 +103,7 @@
                 <div class="mainmenu pull-left">
                     <ul class="nav navbar-nav collapse navbar-collapse">
                         <li><a href="{{route('allProducts')}}">Каталог</a></li>
+                        <li><a href="/about">О проекте</a></li>
                         <li><a href="{{route('contacts')}}">Контакты</a></li>
                     </ul>
                 </div>

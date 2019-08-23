@@ -43,7 +43,7 @@
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
                                 <h2>Всего за 4460 <i class="fa fa-rub" aria-hidden="true"></i></h2>
-                                <p>Вы получаете исходники проекта, код из которого можно использовать для разарботки различных веб-сайтов на Laravel</p>
+                                <p>Вы получаете исходники проекта, код из которого можно использовать для разработки различных веб-сайтов на Laravel</p>
                                 <button type="button" class="btn btn-default get" onclick="location.href='/about'">Подробнее</button>
                             </div>
                             <div class="col-sm-6">
