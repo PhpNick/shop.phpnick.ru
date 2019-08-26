@@ -217,6 +217,12 @@ Route::group(['middleware' => ['restrictToAdmin']], function () {
 
 	//display edit special form
 	Route::get('admin/editSpecialForm/{id}', ["uses"=>"Admin\AdminSpecialsController@editSpecialForm", "as"=> "adminEditSpecialForm"]);
+
+	//messages control panel
+	Route::get('admin/messagesPanel/', ["uses" => "Admin\AdminMessagesController@messagesPanel" , "as" => "messagesPanel"]);
+
+	//delete message
+	Route::get('admin/deleteMessage/{id}', ["uses"=>"Admin\AdminMessagesController@deleteMessage", "as"=> "adminDeleteMessage"]);		
 });
 
 //Admin Panel

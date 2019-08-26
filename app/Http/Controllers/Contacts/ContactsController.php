@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\DB;
 
 class ContactsController extends Controller
 {
@@ -37,11 +38,28 @@ class ContactsController extends Controller
 		}
 		else {
 			if($request->ajax()) {
-          		return 'Ваш вопрос успешно отправлен!';
+				if($this->saveToDB($request))
+          			return 'Ваш вопрос успешно отправлен!';
         	}
         	else {
-		    	return redirect(URL::previous().'#contact-form')->with('success','Ваш вопрос успешно отправлен!');
+		    	if($this->saveToDB($request))
+		    		return redirect(URL::previous().'#contact-form')->with('success','Ваш вопрос успешно отправлен!');
 		    }
 		}   	
+    }
+
+    private function saveToDB(Request $request) {
+    	$name =  $request->input('name');
+        $email =  $request->input('email');
+        $subject =  $request->input('subject');
+        $message =  $request->input('message');
+
+        $newMessageArray = array("name"=>$name, "email"=>$email,"subject"=> $subject,"message"=> $message);
+
+        $created = DB::table("messages")->insert($newMessageArray);
+        if($created) {
+        	return true;
+        }
+        else return false;
     }
 }

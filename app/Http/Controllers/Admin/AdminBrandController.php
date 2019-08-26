@@ -51,13 +51,13 @@ class AdminBrandController extends Controller
 
     public function deleteBrand(Request $request, $id){
 
-    $deleted =  DB::table('brands')->where("id",$id)->delete();    
-    if($deleted){ 
-       return redirect()->back()->with('brandDeletionStatus', 'Бренд был успешно удален');   
-    }else{
+      $deleted =  DB::table('brands')->where("id",$id)->delete();    
+      if($deleted){ 
+         return redirect()->back()->with('brandDeletionStatus', 'Бренд был успешно удален');   
+      }else{
 
-      return redirect()->back()->with('brandDeletionStatus', 'Бренд не удалось удалить');   
-    }
+        return redirect()->back()->with('brandDeletionStatus', 'Бренд не удалось удалить');   
+      }
 
     }
 
