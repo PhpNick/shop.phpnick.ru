@@ -2607,3 +2607,7 @@ span.cart-badge {
   cursor: pointer;
   background-color: #f6f6f7;
 }
+
+.grecaptcha-badge { 
+    bottom: 100px !important;
+}

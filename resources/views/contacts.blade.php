@@ -28,6 +28,7 @@
             	@endif	
 		    	<form id="main-contact-form" class="contact-form row" name="contact-form" method="post" action="{{ route('contactsAskForm') }}">
 		    		{{ csrf_field() }}
+		    		<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
 		            <div class="form-group col-md-6">
 		                <input type="text" name="name" class="form-control" required="required" placeholder="Имя *">
 		            </div>
@@ -45,19 +46,26 @@
 		            </div>
 		            @section('ajax')
                     @parent
-                        $('#contactsAsksubmit').click(function(e){
-                            e.preventDefault();
-                            $.ajax({
-                               type:'POST',
-                               data: $("#main-contact-form").serialize(),
-                               url:"{{ route('contactsAskForm') }}",
-                               success:function(data){
-                                  $( "#contact-form h2" ).after('<div class="alert alert-success">'+data+'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-								  //Очищаем форму	
-                                  $('#main-contact-form').trigger('reset');
-                               }
-                            });
-                          });
+                    grecaptcha.ready(function() {
+					grecaptcha.execute('<?php echo config("myconsts.captcha_site_key"); ?>', {action: 'contactsAskForm'})
+					.then(function(token) {
+					    //console.log(token);
+					    document.getElementById('g-recaptcha-response').value=token;
+					});
+					});                    
+                    $('#contactsAsksubmit').click(function(e){
+                        e.preventDefault();
+                        $.ajax({
+                           type:'POST',
+                           data: $("#main-contact-form").serialize(),
+                           url:"{{ route('contactsAskForm') }}",
+                           success:function(data){
+                              $( "#contact-form h2" ).after('<div class="alert alert-success">'+data+'<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+							  //Очищаем форму	
+                              $('#main-contact-form').trigger('reset');
+                           }
+                        });
+                      });
                     @endsection 
 		        </form>
 			</div>

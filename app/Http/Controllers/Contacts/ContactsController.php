@@ -16,35 +16,38 @@ class ContactsController extends Controller
     }
 
     public function ask(Request $request){
-		$input = $request->all();
+		$recaptcha = parent::getCaptcha($_POST['g-recaptcha-response']);
+    	if($recaptcha->success == true && $recaptcha->score > 0.5){
+			$input = $request->all();
 
-		$rules = [
-		    'name' => 'required|max:255',
-		    'email' => 'required|email',
-		    'subject' => 'max:255',
-		    'message' => 'required|max:1024',
-		];        
-		$messages = [
-		    'name.required' => 'Мы должны знать ваше имя!',
-		    'email.required' => 'Для того, чтобы связаться с вами мы должны знать ваш почтовый адрес',
-		    'email.email' => 'Укажите верный почтовый адрес',
-		    'message.required' => 'Напишите что-нибудь!'
-		];
-		$validator = Validator::make($input, $rules, $messages);
-		if ($validator->fails()) {
-		    return redirect(URL::previous().'#contact-form')
-		                ->withErrors($validator)
-		                ->withInput();
-		}
-		else {
-			if($request->ajax()) {
-				if($this->saveToDB($request))
-          			return 'Ваш вопрос успешно отправлен!';
-        	}
-        	else {
-		    	if($this->saveToDB($request))
-		    		return redirect(URL::previous().'#contact-form')->with('success','Ваш вопрос успешно отправлен!');
-		    }
+			$rules = [
+			    'name' => 'required|max:255',
+			    'email' => 'required|email',
+			    'subject' => 'max:255',
+			    'message' => 'required|max:1024',
+			];        
+			$messages = [
+			    'name.required' => 'Мы должны знать ваше имя!',
+			    'email.required' => 'Для того, чтобы связаться с вами мы должны знать ваш почтовый адрес',
+			    'email.email' => 'Укажите верный почтовый адрес',
+			    'message.required' => 'Напишите что-нибудь!'
+			];
+			$validator = Validator::make($input, $rules, $messages);
+			if ($validator->fails()) {
+			    return redirect(URL::previous().'#contact-form')
+			                ->withErrors($validator)
+			                ->withInput();
+			}
+			else {
+				if($request->ajax()) {
+					if($this->saveToDB($request))
+	          			return 'Ваш вопрос успешно отправлен!';
+	        	}
+	        	else {
+			    	if($this->saveToDB($request))
+			    		return redirect(URL::previous().'#contact-form')->with('success','Ваш вопрос успешно отправлен!');
+			    }
+			}
 		}   	
     }
 

@@ -46,9 +46,18 @@
             <div class="col-sm-4">
                 <div class="signup-form"><!--sign up form-->
                     <h2>Регистрация</h2>
-                                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
-
+                        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+                        <script>
+                        grecaptcha.ready(function() {
+                        grecaptcha.execute('<?php echo config("myconsts.captcha_site_key"); ?>', {action: 'registerUser'})
+                        .then(function(token) {
+                            //console.log(token);
+                            document.getElementById('g-recaptcha-response').value=token;
+                        });
+                        });
+                        </script>
                         <input id="name" type="text" name="name" value="{{ old('name') }}" placeholder="ФИО" required autofocus>
 
                         @if ($errors->has('name'))

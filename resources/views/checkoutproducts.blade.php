@@ -23,6 +23,16 @@
 
 
                                     {{csrf_field()}}
+                                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+                                    <script>
+                                    grecaptcha.ready(function() {
+                                    grecaptcha.execute('<?php echo config("myconsts.captcha_site_key"); ?>', {action: 'createNewOrder'})
+                                    .then(function(token) {
+                                        //console.log(token);
+                                        document.getElementById('g-recaptcha-response').value=token;
+                                    });
+                                    });
+                                    </script>
 
                                     @if(Auth::check())
                                     <div class="form-group">

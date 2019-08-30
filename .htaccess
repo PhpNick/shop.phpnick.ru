@@ -1,0 +1,3 @@
+# For reCAPTCHA
+php_value  allow_url_fopen  ON
+php_value  allow_url_include  ON
