@@ -1,5 +1,5 @@
 <?php
 return [
-	'captcha_site_key' => '6LdIX7UUAAAAAGnoQI7Cw94gLNkOSk9GToBhTzMC',
-	'captcha_secret_key' => '6LdIX7UUAAAAAH6BQArxcnVyX7XZ5_mDL2EUAOp8',
+	'captcha_site_key' => '6LdXD7YUAAAAAMzTTfhoq4ur97XagAIngEmxMzIu',
+	'captcha_secret_key' => '6LdXD7YUAAAAAC8x98j4tbLR__hsFpC_GxqyDoFk',
 ];
