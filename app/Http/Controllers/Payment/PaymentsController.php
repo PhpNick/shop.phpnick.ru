@@ -62,8 +62,6 @@ class PaymentsController extends Controller{
 
         $paypalEnv       = 'sandbox'; // Or 'production'
         $paypalURL       = 'https://api.sandbox.paypal.com/v1/'; //change this to paypal live url when you go live
-        $paypalClientID  = 'AfmX5EFaDCZcU6ztCrvh3fr0y9bnjlPj7X0g81tMZhcWLPFqfI84l75UZunkhO9pjfoFrsQtHFaCTaf8';
-        $paypalSecret   = 'ENLc2aSttRJrc0VhmCeoscpUhYUtEjJaT9ctp-6WsKxW0s-vs4iltY1kk8WGewFQx2yvcVshVJGLnfPH';
 
         //Здесь получаем access token от paypal,
         //ЧТобы получить доступ к paypal
@@ -73,7 +71,7 @@ class PaymentsController extends Controller{
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERPWD, $paypalClientID.":".$paypalSecret);
+        curl_setopt($ch, CURLOPT_USERPWD, env("PAYPAL_CLIENT_ID").":".env("PAYPAL_SECRET"));
         curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
         $response = curl_exec($ch);
         curl_close($ch);

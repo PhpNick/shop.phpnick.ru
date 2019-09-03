@@ -47,7 +47,7 @@
 		            @section('ajax')
                     @parent
                     grecaptcha.ready(function() {
-					grecaptcha.execute('<?php echo config("myconsts.captcha_site_key"); ?>', {action: 'contactsAskForm'})
+					grecaptcha.execute('<?php echo env("CAPTCHA_SITE_KEY"); ?>', {action: 'contactsAskForm'})
 					.then(function(token) {
 					    //console.log(token);
 					    document.getElementById('g-recaptcha-response').value=token;

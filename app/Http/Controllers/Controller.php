@@ -12,7 +12,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected static function getCaptcha($secretKey){
-        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".config("myconsts.captcha_secret_key")."&response={$secretKey}");
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".env("CAPTCHA_SECRET_KEY")."&response={$secretKey}");
         $return = json_decode($response);
         return $return;
     }	
