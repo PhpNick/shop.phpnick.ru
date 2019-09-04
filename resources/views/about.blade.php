@@ -42,7 +42,7 @@
 		<div class="col-sm-9">
 			<div class="blog-post-area">
 				<div class="single-blog-post">
-					<h3>Подробнее о проекте</h3>
+					<h3>Магазин в добрые руки</h3>
 					<div class="post-meta">
 						<ul>
 							<li><i class="fa fa-user"></i> Николай Старков</li>
