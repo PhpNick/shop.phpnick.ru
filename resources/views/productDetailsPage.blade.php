@@ -44,8 +44,8 @@
 					<div id="ajax-catalog" class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<a href="{{asset ('storage')}}/product_images/{{$product['image']}}" data-lightbox="product-image">
-								<img src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" />
+								<a href="{{asset ('storage')}}/product_images/{{$product['id']}}/{{$product['image']}}" data-lightbox="product-image">
+								<img src="{{asset ('storage')}}/product_images/{{$product['id']}}/{{$product['image']}}" alt="" />
 								</a>
 							</div>
 							<!-- Slider -->

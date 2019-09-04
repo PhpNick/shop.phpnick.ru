@@ -4,7 +4,7 @@
         <div class="product-image-wrapper">
             <div class="single-products">
                 <div class="productinfo text-center">
-                    <img src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" />
+                    <img src="{{asset ('storage')}}/product_images/{{$product['id']}}/{{$product['image']}}" alt="" />
                     <h2>
                         <a href="{{route('productDetailsPage',['product'=>$product->slug])}}">{{$product->name}}</a>
                         </h2>
@@ -44,7 +44,7 @@
                                    success:function(data){
                                       $( ".ajax-cart" ).html('<i class="fa fa-shopping-cart"></i> Корзина <span class="badge cart-badge">'+data['1']+'</span>');
 
-$("#itemAddedToCart .modal-body").html('<img width="100" style="float: left; margin-right: 5px" src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>@if($product->special && $product->special->discount() > 0)<strong>{{$product->price - $product->special->discount($product->price)}}</strong> <i class="fa fa-rub" aria-hidden="true"></i> <s>{{$product->price}}</s> <i class="fa fa-rub" aria-hidden="true"></i>@else<strong>{{$product->price}}</strong> <i class="fa fa-rub" aria-hidden="true"></i>@endif');
+$("#itemAddedToCart .modal-body").html('<img width="100" style="float: left; margin-right: 5px" src="{{asset ('storage')}}/product_images/{{$product['id']}}/{{$product['image']}}" alt="" /><b>Категория: </b>{{$product->category->name}}<br><b>Наименование: </b>{{$product->name}}<br><b>Бренд: </b>{{$product->brand->name}}<br><b>Цена: </b>@if($product->special && $product->special->discount() > 0)<strong>{{$product->price - $product->special->discount($product->price)}}</strong> <i class="fa fa-rub" aria-hidden="true"></i> <s>{{$product->price}}</s> <i class="fa fa-rub" aria-hidden="true"></i>@else<strong>{{$product->price}}</strong> <i class="fa fa-rub" aria-hidden="true"></i>@endif');
                                       $("#itemAddedToCart").modal('show');
                                    }
                                 });

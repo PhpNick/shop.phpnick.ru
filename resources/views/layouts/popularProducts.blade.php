@@ -15,7 +15,7 @@
             <div class="product-image-wrapper">
             <div class="single-products">
             <div class="productinfo  text-center">
-                <img src="{{asset ('storage')}}/product_images/{{$product['image']}}" alt="" />
+                <img src="{{asset ('storage')}}/product_images/{{$product['id']}}/{{$product['image']}}" alt="" />
                 <h2>
                     <a href="{{route('productDetailsPage',['product'=>$product->slug])}}">{{$product->name}}</a>
                     </h2>

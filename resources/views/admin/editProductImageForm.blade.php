@@ -18,7 +18,7 @@
     <h2>Изменение картинки</h2>
 
     <h4>Текущая картинка</h4>
-    <div><img src="{{asset ('storage')}}/product_images/{{$product['image']}}" width="100" height="100" style="max-height:220px" ></div>
+    <div><img src="{{asset ('storage')}}/product_images/{{$product['id']}}/{{$product['image']}}" width="100" height="100" style="max-height:220px" ></div>
 
     <form action="{{ route('adminUpdateProductImage',['id' => $product->id ])}}" method="post" enctype="multipart/form-data">
 

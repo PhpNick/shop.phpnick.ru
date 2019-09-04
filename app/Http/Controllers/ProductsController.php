@@ -95,7 +95,7 @@ class ProductsController extends Controller
           foreach ($products as $key => $product) {
           $output.='<a class="line" 
           href="'.route('productDetailsPage',['product'=>$product->slug]).'"><div>'.
-          '<img width="100" style="float: left; margin-right: 5px" src="'.asset ('storage').'/product_images/'.$product['image'].'" alt="" />'.
+          '<img width="100" style="float: left; margin-right: 5px" src="'.asset ('storage').'/product_images/'.$product['id'].'/'.$product['image'].'" alt="" />'.
           '<p>'.$product->name.'</p>'.
           '<p>'.$product->brand->name.' | '.$product->category->name.'</p>';
           if($product->special) {
@@ -130,7 +130,7 @@ class ProductsController extends Controller
         }
       };
       $check($product);
-      $path = 'public/product_images/'.$product->slug.'/additional_images/';
+      $path = 'public/product_images/'.$product->id.'/additional_images/';
       if(Storage::disk('local')->exists($path)) {
         $files = Storage::disk('local')->files($path);
         return view("productDetailsPage",compact("product", "files"));

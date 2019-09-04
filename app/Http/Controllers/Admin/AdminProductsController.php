@@ -50,7 +50,12 @@ class AdminProductsController extends Controller
 
         $imageName = $stringImageReFormat.".".$ext; //blackdress.jpg
         $imageEncoded = File::get($request->image);
-        Storage::disk('local')->put('public/product_images/'.$slug.'/'.$imageName, $imageEncoded);
+
+        $newProductArray = array("name"=>$name, "slug"=>$slug, "short_description"=> $shortDescription,"description"=> $description, "image"=> $imageName,"price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"publish"=>$publish,"category_id"=>$category_id, "brand_id"=>$brand_id, "special_id"=>$special_id);
+
+        $created = DB::table("products")->insert($newProductArray);
+        $id = DB::getPdo()->lastInsertId();
+        Storage::disk('local')->put('public/product_images/'.$id.'/'.$imageName, $imageEncoded);
 
         // Закачиваем в папку дополнительные файлы
         if($request->hasFile('additional_images')) {
@@ -65,14 +70,10 @@ class AdminProductsController extends Controller
               if ($validator->passes()) {
                 $imageEncoded = File::get($addimage);
                 Storage::disk('local')->put(
-                  'public/product_images/'.$slug.'/additional_images/'.$addimage->getClientOriginalName(), $imageEncoded);
+                  'public/product_images/'.$id.'/additional_images/'.$addimage->getClientOriginalName(), $imageEncoded);
               }
           }
-        }        
-
-        $newProductArray = array("name"=>$name, "slug"=>$slug, "short_description"=> $shortDescription,"description"=> $description, "image"=> $slug.'/'.$imageName,"price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"publish"=>$publish,"category_id"=>$category_id, "brand_id"=>$brand_id, "special_id"=>$special_id);
-
-        $created = DB::table("products")->insert($newProductArray);
+        }             
 
         if($created){
             return redirect()->route("adminDisplayProducts");
@@ -105,18 +106,18 @@ class AdminProductsController extends Controller
         if($request->hasFile("image")){
 
           $product = Product::find($id);
-          $exists = Storage::disk('local')->exists("public/product_images/".$product->image);
+          $exists = Storage::disk('local')->exists("public/product_images/".$id."/".$product->image);
 
           //delete old image
           if($exists){
-             Storage::delete('public/product_images/'.$product->image);
+             Storage::delete('public/product_images/'.$id."/".$product->image);
 
           }
 
           //upload new image
             $ext = $request->file('image')->getClientOriginalExtension(); //jpg
 
-            $request->image->storeAs("public/product_images/",$product->image);
+            $request->image->storeAs("public/product_images/".$id."/",$product->image);
 
             $arrayToUpdate = array('image'=>$product->image);
             DB::table('products')->where('id',$id)->update($arrayToUpdate);
@@ -162,12 +163,12 @@ class AdminProductsController extends Controller
 
       $product = Product::find($id);
 
-      $exists =  Storage::disk("local")->exists("public/product_images/".$product->image);
+      $exists =  Storage::disk("local")->exists("public/product_images/".$id."/".$product->image);
 
       //if old image exists
       if($exists){
           //delete folder with it
-          Storage::deleteDirectory('public/product_images/'.$product->slug);
+          Storage::deleteDirectory('public/product_images/'.$product->id);
       }
       Product::destroy($id);
       return redirect()->back()->with('productDeletionStatus', 'Товар был успешно удален');
