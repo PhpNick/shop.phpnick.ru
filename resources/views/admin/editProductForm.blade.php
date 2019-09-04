@@ -12,7 +12,10 @@
             <label for="name">Название</label>
             <input type="text" class="form-control" name="name" id="name" placeholder="Название товара" value="{{$product->name}}" required>
         </div>
-
+        <div class="form-group">
+            <label for="slug">Алиас</label>
+            <input type="text" class="form-control" name="slug" id="slug" placeholder="Название для ссылки" value="{{$product->slug}}" required>
+        </div> 
         <div class="form-group">
             <label for="short-description">Короткое описание</label>
             <input type="text" class="form-control" name="short-description" id="short-description" placeholder="Короткое описание товара" value="{{$product->short_description}}" required>

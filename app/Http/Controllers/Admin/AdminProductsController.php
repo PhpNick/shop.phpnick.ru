@@ -136,6 +136,7 @@ class AdminProductsController extends Controller
     public function updateProduct(Request $request,$id){
 
       $name =  $request->input('name');
+      $slug =  $request->input('slug');
       $category_id = $request->input('category_id');
       $brand_id = $request->input('brand_id');
       $shortDescription =  $request->input('short-description');
@@ -148,7 +149,7 @@ class AdminProductsController extends Controller
         if($request->has('special_id'))
           $special_id = $request->input('special_id');
 
-      $updateArray = array("name"=>$name, "short_description"=> $shortDescription,"description"=> $description, "price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"publish"=>$publish,"category_id"=>$category_id, "brand_id"=>$brand_id, "special_id"=>$special_id);
+      $updateArray = array("name"=>$name, "slug"=>$slug, "short_description"=> $shortDescription,"description"=> $description, "price"=>$price, "quantity"=>$quantity,"popular"=>$popular,"publish"=>$publish,"category_id"=>$category_id, "brand_id"=>$brand_id, "special_id"=>$special_id);
 
       DB::table('products')->where('id',$id)->update($updateArray);
 
