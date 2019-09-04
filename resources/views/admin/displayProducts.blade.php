@@ -4,8 +4,8 @@
 
 <h2>Все товары</h2>
 
-@if(session('productDeletionStatus'))
-<div class="alert alert-warning alert-dismissible fade show" role="alert"> {{session('productDeletionStatus')}}
+@if(session('flash'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert"> {{session('flash')}}
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -27,6 +27,7 @@
             <th>Популярный</th>
             <th>Опубликован</th>
             <th>Редактировать картинку</th>
+            <th>Редактировать доп. картинки</th>
             <th>Редактировать</th>
             <th>Удалить</th>
         </tr>
@@ -68,8 +69,9 @@
                     </select>
 
                 </form>                
-            </td>            
-            <td><a href="{{ route('adminEditProductImageForm',['id' => $product['id'] ])}}" class="btn btn-sm btn-outline-secondary">Изменить</a></td>
+            </td>
+            <td><a href="{{ route('adminEditProductImageForm',['id' => $product['id'] ])}}" class="btn btn-sm btn-outline-secondary">Изменить</a></td>            
+            <td><a href="{{ route('adminEditProductImagesForm',['id' => $product['id'] ])}}" class="btn btn-sm btn-outline-secondary">Изменить</a></td>
             <td><a href="{{ route('adminEditProductForm',['id' => $product['id'] ])}}" class="btn btn-sm btn-outline-primary">Редактировать</a></td>
             <td><a onclick="return confirm('Вы уверены?')" href="{{ route('adminDeleteProduct',['id' => $product['id']])}}" class="btn btn-sm btn-warning">Удалить</a></td>
 

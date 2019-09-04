@@ -71,8 +71,14 @@ Route::group(['middleware' => ['restrictToAdmin']], function () {
 	//display edit product image form
 	Route::get('admin/editProductImageForm/{id}', ["uses"=>"Admin\AdminProductsController@editProductImageForm", "as"=> "adminEditProductImageForm"]);
 
+	//display edit product additional images form
+	Route::get('admin/editProductImagesForm/{id}', ["uses"=>"Admin\AdminProductsController@editProductImagesForm", "as"=> "adminEditProductImagesForm"]);	
+
 	//update product image
 	Route::post('admin/updateProductImage/{id}', ["uses"=>"Admin\AdminProductsController@updateProductImage", "as"=> "adminUpdateProductImage"]);
+
+	//update product additional images
+	Route::post('admin/updateProductImages/{id}', ["uses"=>"Admin\AdminProductsController@updateProductImages", "as"=> "adminUpdateProductImages"]);	
 
 	//make product data
 	Route::post('admin/updateProduct/{id}', ["uses"=>"Admin\AdminProductsController@updateProduct", "as"=> "adminUpdateProduct"]);

@@ -8,6 +8,7 @@
     <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
     <!-- bootstrap -->
     <link href="{{asset ('css/bootstrap-admin.min.css') }}" rel="stylesheet">
+    <link href="{{asset('css/lightbox.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
@@ -179,9 +180,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="{{asset ('js/dashboard.js') }}"></script>
+<script src="{{asset('js/lightbox.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/bootstrap4.min.js')}}"></script>
 <script>
+  lightbox.option({
+      'albumLabel': 'Изображение %1 из %2',
+      'wrapAround': true
+  }) 
   $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

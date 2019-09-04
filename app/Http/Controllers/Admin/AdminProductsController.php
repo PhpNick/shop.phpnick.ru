@@ -96,6 +96,18 @@ class AdminProductsController extends Controller
         return view('admin.editProductImageForm',['product'=>$product]);
     }
 
+    //display edit product additional images form
+    public function editProductImagesForm($id){
+      $product = Product::find($id);
+      $path = 'public/product_images/'.$id.'/additional_images/';
+      if(Storage::disk('local')->exists($path)) {
+        $files = Storage::disk('local')->files($path);
+        return view("admin.editProductImagesForm",compact("product", "files"));
+      }
+      else        
+        return view("admin.editProductImagesForm",compact("product"));
+    }    
+
     //update product Image
     public function updateProductImage(Request $request,$id){
 
@@ -132,6 +144,36 @@ class AdminProductsController extends Controller
 
         }
     }
+
+    //update product additional images
+    public function updateProductImages(Request $request,$id){
+
+        // Закачиваем в папку дополнительные файлы
+        if($request->hasFile('additional_images')) {
+          //delete folder with old images
+          Storage::deleteDirectory('public/product_images/'.$id.'/additional_images');
+          $additional_images = $request->file('additional_images');
+
+          $rules = [
+              'additional_images' => 'file|image|mimes:jpg,png,jpeg|max:5000',
+          ];          
+          foreach ($additional_images as $addimage) {
+            $data = ['additional_images' => $addimage];
+              $validator = Validator::make($data, $rules);
+              if ($validator->passes()) {
+                $imageEncoded = File::get($addimage);
+                Storage::disk('local')->put(
+                  'public/product_images/'.$id.'/additional_images/'.$addimage->getClientOriginalName(), $imageEncoded);
+              }
+          }
+          return redirect()->route("adminDisplayProducts");          
+
+        }
+        else{
+           $error = "Не было выбрано ни одного файла";
+           return $error;
+        }
+    }    
 
     //update product fields (name,description....)
     public function updateProduct(Request $request,$id){
@@ -171,7 +213,7 @@ class AdminProductsController extends Controller
           Storage::deleteDirectory('public/product_images/'.$product->id);
       }
       Product::destroy($id);
-      return redirect()->back()->with('productDeletionStatus', 'Товар был успешно удален');
+      return redirect()->back()->with('flash', 'Товар был успешно удален');
 
     }
 
