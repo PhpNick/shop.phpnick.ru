@@ -18,12 +18,11 @@
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
                                 <h2>Интернет-магазин на Laravel</h2>
-                                <p>Реализован основной функционал типового интернет-магазина. Продаю его исходники. Также могу доработать для реального интернет-магазина</p>
+                                <p>Реализован основной функционал типового интернет-магазина.</p>
                                 <button type="button" class="btn btn-default get" onclick="location.href='/about'">Подробнее</button>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{asset('images/home/girl1.jpg')}}" class="girl img-responsive" alt="" />
-                                <img src="{{asset('images/home/pricing.png')}}"  class="pricing" alt="" />
                             </div>
                         </div>
                         <div class="item">
@@ -35,20 +34,18 @@
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{asset('images/home/girl2.jpg')}}" class="girl img-responsive" alt="" />
-                                <img src="{{asset('images/home/pricing.png')}}"  class="pricing" alt="" />
                             </div>
                         </div>
 
                         <div class="item">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Всего за 4460 <i class="fa fa-rub" aria-hidden="true"></i></h2>
-                                <p>Вы получаете исходники проекта, код из которого можно использовать для разработки различных веб-сайтов на Laravel, а также как основу для интернет-магазина</p>
+                                <h2>Исходники можно посмотреть на GitHub</h2>
+                                <p>Исходники проекта, код из которого можно использовать для разработки различных веб-сайтов на Laravel, а также как основу для интернет-магазина</p>
                                 <button type="button" class="btn btn-default get" onclick="location.href='/about'">Подробнее</button>
                             </div>
                             <div class="col-sm-6">
                                 <img src="{{asset('images/home/girl3.jpg')}}" class="girl img-responsive" alt="" />
-                                <img src="{{asset('images/home/pricing.png')}}" class="pricing" alt="" />
                             </div>
                         </div>
 
